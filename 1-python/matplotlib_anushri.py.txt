@@ -1,0 +1,266 @@
+"""Created on Fri Aug 11 09:19:02 2023
+
+-------------------------MATPLOTLIB-------------------------------
+
+-Used to generate graphs"""
+
+#Line graph
+import matplotlib.pyplot as plt
+plt.plot([1,3,2,4])
+plt.show()
+
+###################################################################
+
+#Multiline plot
+import matplotlib.pyplot as plt
+x=range(1,5)
+plt.plot(x,[xi*1.5 for xi in x])
+plt.plot(x,[xi*3.0 for xi in x])
+plt.plot(x,[xi/3.0 for xi in x])
+plt.show() #matplotlib automatically chooses colors
+
+###################################################################
+
+#Grid, axes and labels
+
+#Adding a grid
+import matplotlib.pyplot as plt
+import numpy as np
+x=np.arange(1,5)
+plt.plot(x,x*1.5,x,x*3.0,x,x/3.0)
+plt.grid(True)
+plt.show()
+
+###################################################################
+
+#Handling axes
+
+import matplotlib.pyplot as plt
+import numpy as np
+x=np.arange(1,5)
+plt.plot(x,x*1.5,x,x*3.0,x,x/3.0)
+plt.axis() # shows the current axis limit values
+plt.axis([0,5,-1,13]) #set new axes limits
+     # [xmin,xmax,ymin,ymax]
+plt.show()
+
+###################################################################
+
+#Adding labels
+
+import matplotlib.pyplot as plt
+plt.plot([1,3,2,4])
+plt.xlabel('This is X axis')
+plt.ylabel('This is Y axis')
+plt.show()
+
+##################################################################
+
+#Adding a title
+
+import matplotlib.pyplot as plt
+plt.plot([1,3,2,4])
+plt.title('Simple Plot')
+plt.show()
+
+##################################################################
+
+#Adding a legend
+
+import matplotlib.pyplot as plt
+import numpy as np
+x=np.arange(1,5)
+plt.plot(x,x*1.5,label='Normal')
+plt.plot(x,x*3.0,label='Fast')
+plt.plot(x,x/3.0,label='Slow')
+plt.legend()
+plt.show()
+
+####################################################################################################################################
+
+#Control colors
+
+'''Color abbrevations
+
+Color  Name
+b    - blue
+c    - cyan
+g    - green 
+k    - black
+m    - magenta
+r    - red
+w    - white
+y    - yellow '''
+
+import matplotlib.pyplot as plt
+import numpy as np
+y=np.arange(1,3)
+plt.plot(y,'y')
+plt.plot(y+1,'m')
+plt.plot(y+2,'c')
+plt.show()
+
+####################################################################################################################################
+
+#Specifying styles in multiline plots
+
+import matplotlib.pyplot as plt
+import numpy as np
+y=np.arange(1,3)
+plt.plot(y,'--',y+1,'-.',y+2,':') #give styles in single quote
+plt.show()
+
+##################################################################
+
+'''
+   Style abbrevation styles
+    -   solid line
+    :   dotted line
+    --  dashed line
+    -.  dash-dot line'''
+
+##################################################################
+
+#Markers
+
+import matplotlib.pyplot as plt
+import numpy as np
+y=np.arange(1,3,0.2)
+plt.plot(y,'x',y+0.5,'o',y+1,'D',y+1.5,'^',y+2,'s')
+plt.show()
+
+##################################################################
+
+#Histogram Charts
+
+import matplotlib.pyplot as plt
+import numpy as np
+y=np.random.randn(1000)
+plt.hist(y)
+plt.show()
+
+##################################################################
+
+#Bar plot/graph- used in EDA
+
+import matplotlib.pyplot as plt
+plt.bar([1,2,3],[3,2,5])
+plt.show()
+
+####################################################################################################################################
+
+'''Scatter plots
+-Bivariate analysis
+-Data visualization is done as a collection of points not coonected by lines
+-Display values for 2 sets of data
+'''
+
+import matplotlib.pyplot as plt
+import numpy as np
+x=np.random.randn(1000)
+y=np.random.randn(1000)
+plt.scatter(x,y)
+plt.show()
+
+#Change colors of scatter plot
+size=50*np.random.randn(1000)
+colors=np.random.rand(1000)
+plt.scatter(x,y,s=size,c=colors)
+plt.show()
+
+##################################################################
+
+#Adding text 
+
+import matplotlib.pyplot as plt
+import numpy as np
+X=np.linspace(-4,4,1024)
+Y=.25*(X+4.)*(X+1.)*(X-2.)
+plt.text(-0.5,-0.25,'Brackmard Minimum')
+plt.plot(X,Y,c='k')
+plt.show()
+
+##################################################################
+
+'''-------------------SEABORN---------------------'''
+
+#How to use Seaborn package for data visualization
+#pip install seaborn
+
+import seaborn as sns
+import pandas 
+import matplotlib.pyplot as plt
+sns.get_dataset_names() #seaborn has 18 builtin datasets that can be found using this command
+df=sns.load_dataset('titanic')
+df.head()
+
+##################################################################
+
+#Count plot
+'''- helpful when dealing with categorical values
+   - Used to plot frequency of different categories'''
+
+sns.countplot(x='sex',data=df)
+#x- name of column
+#data- dataframe
+
+sns.countplot(x='sex',hue='survived',data=df,palette='Set1') 
+sns.countplot(x='sex',hue='survived',data=df,palette='Set2')
+sns.countplot(x='sex',hue='survived',data=df,palette='Set3')
+#hue- name of categorical column to split the bars
+#palette is used for set/palette of colors
+
+##################################################################
+
+#KDE Plot
+'''-Kernel Density Estimate Plot
+   -used to plot distribution of continuous data'''
+
+sns.kdeplot(x='age',data=df,color='black')
+#x- column name
+#df- dataframe
+#color- graph color
+
+##################################
+
+#Distribution Plot
+sns.displot(x='age',kde=True,bins=6,data=df)
+#kde- its set to False by default
+#bins- no. of bars/bins
+#Lower the no. wider the bars and wider the interval
+
+sns.displot(x='age',kde=True,bins=5,hue=df['survived'],palette='Set1',data=df)
+
+##################################################################
+
+#Scatter plot
+# -for this plot we will be working with iris dataset
+
+#load iris dataset
+df=sns.load_dataset('iris')
+df.head()
+
+#Scatterplot help understand corelation between data
+sns.scatterplot(x='sepal_length',y='petal_length',data=df,hue='species')
+
+##################################################################
+
+#Joint Plot
+#-used to plot correlation between data
+sns.jointplot(x='sepal_length',y='petal_length',data=df,kind='reg')
+sns.jointplot(x='sepal_length',y='petal_length',data=df,kind='hist')
+sns.jointplot(x='sepal_length',y='petal_length',data=df,kind='kde')
+#kind- kind of plot to be plotted. It can be scatter,hist,reg,kde,resid,hex
+
+##################################################################
+
+#Pair Plots
+sns.pairplot(df)
+
+####################################################################################################################################
+
+#Heat Map
+#-used to visualize confusion,matrices and correlation
+corr=df.corr()
+sns.heatmap(corr)
+

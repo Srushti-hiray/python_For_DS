@@ -1,0 +1,9 @@
+,courses,fee,duration,discount
+r0,sparks,2000.0,30days,1000
+r1,pysparks,25000.0,40days,2000
+r2,hadoop,3000.0,25days,999
+r3,python,4200.0,50days,440
+r4,pandas,,30days,777
+r5,,2500.0,40days,344
+r6,sparks,700.0,25days,223
+r7,cpp,3000.0,50days,500

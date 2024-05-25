@@ -1,0 +1,11 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Aug 22 06:50:08 2023
+
+@author: icon
+"""
+
+#methods in collection
+#### tuple  ####
+#1)count()-count and element in tuple
+#2)index()-at which position the element is
